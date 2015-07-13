@@ -37,15 +37,16 @@ def csvToJsonLocs(csvfile, jsonfile):
     
     try:
     
-        csvf = open(csvfile, 'r')
-        jsf = open(jsonfile, 'w')
-        
-        reader = csv.reader(csvf)
-        out = json.dumps({k: v for k,v in reader}, ensure_ascii=False, indent=2, sort_keys=True)
-        
-        jsf.write(out)
-    
-        print("JSON file successfully created: {}\n".format(jsonfile))
+        with open(csvfile, 'r') as csvf:
+            
+            with open(jsonfile, 'w') as jsf:
+                
+                reader = csv.reader(csvf)
+                out = json.dumps({k: v for k,v in reader}, ensure_ascii=False, indent=2, sort_keys=True)
+                
+                jsf.write(out)
+            
+                print("JSON file successfully created: {}\n".format(jsonfile))
     
     except Exception as err:
         print("Error: {0}\n".format(err))
